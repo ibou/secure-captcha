@@ -37,8 +37,9 @@ $captcha = new Captcha(width: 200, height: 50, numberOfCharacters: 7);
 
 ```php
 $ php -S localhost:8000 decrypt.php
-// 7 lettres
 ```
 
-> Go to :
+> Go to you browser :
 > http://localhost:8000/decrypt.php?rnd=yyEBQcUxR1tIzjnvzSOJZoPPDWfTQXik2Flu86XUadUYdtQIrJkBY/6O1wlI6OeuUnBzQmJwNWdqdzFwMlhmV3R1WjBOdz09
+
+> decrypt.php?rnd=yyEBQcUxR1tIzjnvzSOJZoPPDWfTQXik2Flu86XUadUYdtQIrJkBY/6O1wlI6OeuUnBzQmJwNWdqdzFwMlhmV3R1WjBOdz09

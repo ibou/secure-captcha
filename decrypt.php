@@ -43,29 +43,13 @@ try {
 
   $captchaString = $encryptionService->decrypt($encryptedData);
   $imageData = $captcha->generate($captchaString);
+  // Définir l'en-tête Content-Type pour une image PNG
+
 } catch (Exception $e) {
   echo "Une erreur s'est produite : " . $e->getMessage() . "\n";
 }
 
-?>
+header("Content-Type: image/png");
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Captcha Test</title>
-</head>
-
-
-<body>
-  <form method="post">
-    <img src="data:image/png;base64,<?php echo isset($imageData) ? base64_encode($imageData) : ''; ?>" alt="CAPTCHA">
-    <br>
-    <input type="text" name="captcha" required>
-    <input type="hidden" name="encryptedData" value="<?php echo $encryptedData; ?>">
-    <input type="submit" value="Vérifier">
-  </form>
-</body>
-
-</html>
+// Envoyer l'image directement au navigateur
+echo $imageData;

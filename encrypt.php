@@ -14,7 +14,7 @@ require_once 'secrets.php';
 // Créez une instance de Encryption
 $encryptionService = new Encryption($key, $hmacKey);
 
-$captcha = new Captcha(width: 200, height: 50, numberOfCharacters: 5);
+$captcha = new Captcha(width: 200, height: 50, numberOfCharacters: 4);
 
 $captchaTemp = $captcha->generateCaptchaString();
 $encryptedData = $encryptionService->encrypt($captchaTemp);

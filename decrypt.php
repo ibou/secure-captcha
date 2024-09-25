@@ -13,23 +13,6 @@ $captcha = new Captcha(width: 200, height: 50, numberOfCharacters: 5);
 // Créez une instance de Encryption
 $encryptionService = new Encryption($key, $hmacKey);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-  $decryptedData = $encryptionService->decrypt($_POST['encryptedData']);
-  $decryptedData = str_replace(' ', '+', $decryptedData);
-
-  $isSubmetted = true;
-  var_dump($_POST['captcha']);
-  if (
-    $_POST['captcha'] === $decryptedData
-  ) {
-    echo "Captcha correct";
-  } else {
-    echo "Captcha incorrect";
-  }
-  die('stop');
-}
-
 try {
 
   $encryptedData = null;

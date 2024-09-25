@@ -19,7 +19,8 @@ try {
   $encryptedData = isset($_GET['rnd']) ? $_GET['rnd'] : null;
 
   if (null === $encryptedData) {
-    return;
+    header("HTTP/1.0 400 Bad Request");
+    exit("Paramètre 'rnd' manquant");
   }
   //replace  espace by +
   $encryptedData = str_replace(' ', '+', $encryptedData);
@@ -29,10 +30,7 @@ try {
   // Définir l'en-tête Content-Type pour une image PNG
   header("Content-Type: image/png");
 
-  // Envoyer l'image directement au navigateur
   echo $imageData;
-
 } catch (Exception $e) {
   echo "Une erreur s'est produite : " . $e->getMessage() . "\n";
 }
-

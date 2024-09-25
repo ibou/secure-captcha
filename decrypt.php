@@ -1,19 +1,71 @@
-  <!DOCTYPE html>
-  <html lang="fr">
+<?php
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Captcha Test</title>
-  </head>
+declare(strict_types=1);
 
-  <body>
-    <form method="post">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAyCAIAAACWMwO2AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAQ20lEQVR4nN1dS2wy233/j40NtrHxEzB+AH7bH9jY2B9Sssmq6V303kVWrXRVRUlvoipJe6VKrZqoUqKm0q0qpUqiKk1v1Eqf1F0XuZs06iabVsLmZcDGGPO2AWMwmPfT08Xg8TDMEwb7a3/yYs7hzDnHzG/+r/M/BwRF0UraIpk5hPcSt7myYmLk5ce9L4SmpZqXGcvWzBwMTvWp85LrYlS/hRdDEatm2diPgerOe/9CBi8i5ZtbLrdJVHLsItXMzQ5O9GNmveP63L64s99Znz2OVmVyxaYYK9b9t0OrCmGH9mUt65Ov9nL6wuZ1tal//VdOfJKjdQBI3lXlc+KLtJ+y2dbMKn6NoChK+tjpedzdHiB3HUsKNUuJSu7JRbcnllhbhm0p9cFs1wPdN9BpEUKqvPNcz20vEmvs2dT+ZPej9I6r25M1xZGAHSYjIfmypvd+mAl0fX+/OD1N+ujeUp8+HAIiscKxmlo13PtsWCEsR4Xqii+skaZxefAFBvJl/euTq+ztCHBHc7olJq1yG/UolrbxIh2BVoLS4cMuRTuFxOIOdyKgU66chBtHahFlA3vOvD/RTxH9/4Kj/YDXfra5/wYvxs7iqjfzXFQYhkIhL5WOd7YsFC+kYy2LLXmTli/M0E2gJ2Kx4tFnH1inMHr6DX8otqpRdda7jmv6ty2pHH50qwd02HUjFmiAVJChX4ygicCJcoVagXInUP/QK7HOzuDNG3Klz1lZ35UQay4ipa3lUbpOUpCeBVru9xWuW4teIaTR/ZJClI5AEllFI+p4Ki+FxnVetDjeX4nFjCv0eA15+1qjM6AegyEKeUeBeN4yP94vZxDnaEicp2ygqVJoK0o8xGSKQzGXltce8+I2P+slEY4r1fMAkGuk8UpaYhXLjrERA6myYklJDskOVKjs1Yxs8prKa8H3YF+XUahmu929v697+fmQIKAKc9XM+uFnfggrR4kEImJC1FI7Nf9pNxLLkTMbOJvkrrpVP9SXiBwA+FFYReDBHJSZtH0aoh/gQqBCBJUuI5e2s40DfkrNa/ZvmjgRMek6lev3GBrQEWg42WTtnCuxwpfH6o02tXXj8Sxsb9O17xFp6/WMcZG9HRX8Qf+qlv2b9R0/rL+VddaXaoHR4ZUuxrU+JowDSmLN+2BEE9GI3YtU5MgTBkoO4RKoC7QRK5E/UY4zRup8AVjv5ksnIlE+UY60RimFI6Pq5R47xGDxXx2urnFvX/DHpavzggwtOIEy+dTUOEXM1n3p0G2Q7RNeYNViOK4bwUWRFgCchcautBVOsvpTxlVOweQ2YjWdlsFdsiladthGDAfMvZw7rncMXQqYLlC03I4RAncPaPUulVibUzPf5XFcbRt4MK8TQhEomDrVzjLpoN7BnUB9AhKvpJXi6XzSNy5f537bw7FP9nYdANB0AJnpVYa9b+BOIJsnf7Ddcs2S3nRMnjBMtUyiWqk+PDpEal9xBSULCExrBJwtRy1WywaGJ3k8KafXvbvZvUPzLLFijyXVAG2oqd84R692kJ7ESRfgTqD0fXlmui3JomkxDx5SeDAxNDSflCMK4b/JVxdClHCn0rpZign0FMc6qdwfSVrG4O2tS6HQkxqYy1XTCKfwCUeEKlGNhH31moT3zYhmhiAEMhfrpjGyvGSGHc3vI1wDY6xAUBStNuviQfZJODPJuamheegyc8h90dRtdbNqG0pUNUpO7OyFQKcx356KhzHAAJuvcbBOvXhKAiWHfJmoca4nC50Sdptz/2C3s76OJoYQJakSjVqRpVaQ6M7yOHdIznZhBbvEspxFD9+0CYnLM3TjDTkdRXAk6mnlEPU7SkegCpKekkrVwzt9mpL/Or26yEls1LI3w5MLABCsNLWSQQYhhDZtyCCLbyQIcnH7xPzLrduSiVWt2sTi5//z9DSxt0em84uBuwQ6uUCPtli4fufI5KGyYuAdYiigp1KEkxPHQCBX5E6/PMd3aI6w2272DxaE7TNoPdcan1/RWDGsGmv53YlmSTnIYkQiF2cxUtXmjjDRnU5cZQprUxRJBILbQNWcXTxB+3YGIzfa5V4fg4ARxdSVbXaNq9DKW2PjRm4LmfRQfvwhsZh49wWxaC2AkU+qRzZempwn84xCFXrP4wy99EK7/xNGtK+SXpc88+O1fLFsDZ0c7ou9gbHq19/5Plb86Oc/hg5u4Uj7zTOrbc5v2VXkMgqComjq9nhWwTXLgJl2APCtT39ALP7i3/8av8YJVLOcDx8+i1m3J6vbnuzs6rTQ2JNysoIFgeDLGjgcropBL2FoIPqTL3VWNv7lf5i7vU3lFLOc9h/gbND+/R/CE6t2R3V45a+/8328yIwR/RiXZj2FGzol0Lf/6O8A4LMffYIV//JvfgkA//yTv8UbYAKvGIqNUSXi9Q5LpX4oYfFwuxBCsdKdapS3hZQMFOUrrcfQcKZFu7T9Y8T672/+BK/58uefAkD+e//Fd1BK4GzAxZXJ9CyHkh57MFcj1uAIPzjUMh4uaiZwNbWyBgCi9MkpQ7sZ9TzI5dxV2O9++yuz2QwAJpMpY/Vhldl8BJ/0k8BDgEby0ana6wfroow6S8LlDup1rewGIqsE1GLcWUXUFOPEIiKpc1AiJLHhLLkpn3cXCBar2jHqqI18e58ypTDqSqj1/AIfGKsAQDRz9OzvdBLoDvKQzs8FCpS9pANkUn7tBz99uvwl5S2sJhq9qlV5b+KUt+t12t61GKXpsPfdr3VWnv7sPxj64agpeN1+XasuDvcaZ6ZjFQOW9EwBgWrZIx6hTW8REclEa0Rze0Bf+eo3gKAH4UkVAgCzXGwNcrQHT8yLJUoqZZujgV5eIRtrGIH+7EsUkcy/+rczAFhuPtscZeBkZmJgIMS7z35ILDJIEUswdAjdE+vLn38Knz8Xcc1Ix6poMrMk79dOV1aQWGV/bLOpRP3wyFZFE7PGbYxnGIhykc6tINZLtyu5Rrnt45UpaKSHPBIA+KdfRZ0lN/7JL777ATwp3D65tBz10aFW013/GIg2Fpdxl+RThaJPOtZ6zaqxglhFHScInIQQ8ax2l/pT5ccf0nmFRJCoQ8L+QJsPKwKA3FV2Yo3CKSOCi5P5m3/46Qd/8T1cSmHFzttJsoFSiwXcFYUhPw9bAOByp/W6J5n5tBppgtY3TpSF6ZNT5lwh7znLv4Azz1M525bw3o8QjvjUyzzWhVKxi1nVFrGGyKS8tYFfxzIJ1ZQSAOq+xhBhvQhnFQDQsQoAVo402EXi3RfKjz/86Oc/TphaTMLMebPZjA3NwJ79AcTur++vtvlGhYuodGsJAC5tVWI9UnJS208kMGgK5y3sKgAAghWnVrKLGe8YTCYTbsv3IyBUy8a/9XtvAODbP/sNEJ5KPp4Zn2fSEXSqOTXWZsX+wZ9+ndTg8nf/2fVsGYB7hUKZ6gywP6If/PFHxBos+jB89BY6BA8JJPYQsXHQpq9FiSb18yZBS286YKzyQaQUksEWbBufs19yjTRWzDXSWf/k8qYwW4dPwHkEuwBAySoAGJ+fsngKh9u0b/DouELyKEd2yGurlBwn2lhms3lynDrldbZIvWGBaAZwxHXOtzjBJPkq7lOJjqlbZsGTePcF8f2HDp1LRyASexgg0hooviab3XGw/+xnFn3WoIOtI4AJQIKOCH2TItYJ5Yi8gLHq62+ngYpVAOAMXh9uM2W0jmzxWwDlIkjo9GzqyeyjYx4RmCgdAYD2FPFMNjg1+bxhRKLb42XxnMeqO6o2TphMJiJ7SEzCCFTxFSTrFC9nMhmVy1mSlzgFSIXVYozk44offWIAGlYJiI2v/D4AvPvshyaTqRbLDquoLdEry83aIe3io7l0sxXIyHQ6Zscim48A4X/BGBYxUiS6YFi2OjsrO6Ujd+VFh/BtUq3gvb27jVjCEqjaeBSLeOfxkODL1tYnyUeVEGWVXCzMkjkmR4M32WoD3VJP+cNXq+o1IrEEGQUAklCUE+wKXPCMXiSYb6yMRPa0tNOgI9BM84J1SjOKGVhm2bJw7Ii+NbRJKe8DkxZDHuopvPBiSa5mt9ekI+9xDaMJNaIM5BIrEyx6CieWyWSqJULDSk0Xc4gHI/PaZ6VMKUe/+uefdFb+9h+pY78YKBU9s8XDNEsC+pccwCXK2Alm25FWFcZibpWqj5uD7YG7/ZW2dZLjM9fbN+TkZkpgxCLhX4/v6doXHbExQ5dLkyQjF0OnAMOpM+mMdjdQJ+qP5COEGJQXa3IALNCesLfJZzUQBzMd2W2s+Lkts6rZEVNvdOwTAg7/ioEpcsvxeQsLQQQPDmbPy/vgGA4K9p1rDcu9C7wkZOcaXkTE8iU/nFlkbw4piBW9cyz1IeeaGa7IhX55i71d//Ey7AEAdNXDcGN3UoQOgjhMGDg69a952kx3SDsuZgzUFCw4zqUG9oR3VkcdDYYQrabzIzpzFfHTrsWiqx46iiRidaWK30YaoZAqxmbH+NkGuMAbrtW5tO87scpRGOG9X0sAMLBnCEGHchS+OivoCMTqtwfd11rdIgCkrZEZozBHCjDgxn6ysH/ksaa2jS90tmqnnn2PJFbhNCvdY1myJIJZ8IzmmUxLBkXTe+DHVfbpR4TZSdYJazpmnCELm1SgOLvSZVZF6LKh2eCRphu8r2qn2b8HMrHi3sv5zQ0AsGZ8xinyt/OQsMmUPPYqeavVTTH1JOLh6ry69dFNKLWgmaVUNKVxWp8Wo053tkjv7HkBlEKBUU1Pxxck42fy+dc52o9JYtmvL/cXN/j2GInYyzIeRi4DdaArexmD0+7Y3Tf0vuZFgu3eezAt2ClzrrRVP8P78LBm1Too7unIsbK/MLLKtBHHlzlen3reBlF1W8S6QwDInNumdjhJFhZVyBxdpUOnFBHW1cJRzpyPTO2wip9qOCdW8/vRA8fJveGIyduvBiPip/gqWvQjYy+90ch6bjHuCHxKZTN4MagVxjdHLrJ2ho+5Kxpea6IYcua7CRPXXPL+Ka+S93h0s22TUv46Or7Iw+M4TcX3ZjkFvoPXF9pFHk+ukHdLx1//DEtWXLjqW/o2D/dZYnmbOVkho5QxnTLVteBpWnODRk4yg6PycpijBtMSANjc8QPd80NN2pryA3JyjvP0eHevRZ18+H5c3RJFtsfzg4Hn8ITzxLd71DIrzx/Od2T92qrPgLQ1P2NsncxxGrPuqfipvNjDiUom5I9cdA2yKuxC8HDFXRPmWo+8R/GTK6UnRl/z7B4cDyfp3HJ5ScH10LlI82p5sO20poeiTzbWLxcSx2MuMjDR9zAHEYit+Ugs90SdJ1TDj2L1AHf2WG9ujQtMP62RK2QnpORIRPAhrZW16BXMF7TjwvwCQD+QbrpmBjktg9IhFLZp1ExWsxesm9CvQ4QpYav6DsS0rwRZYllSscNZfjFZwT0vOoRu4xpFv86VwJBHk+MIU+5Ro3EuEu1k7f7J/f5a63cRmFsGTy22Pfz8OC595Y113j+ydxpy7GkMAFCtlnOl+NwUUwgjjlrmkW58gtPzs70dQmgDRVFbroZSoZFN4Ndea4Xuj/JeLvBfOzi2dJ9ddVZeNlIoil7k/Vgx6Yl2PRNKNJ15/Dp13Oyih3zFjF0UvXZifaAU6WycuqsTi4XKRRcjdsKbOmNtc3dz2uMotXsvqYY23ECZqyosQqk7zWybV9jwPIo6ftFOWFTDZvHTT/s509ZdbmEkdyyro0kf5YJy6HxE8wquQCcKlyXpBqdjLGOFmkra/a/B/S+KY0vcVzE88AAAAABJRU5ErkJggg==" alt="CAPTCHA">
-      <br>
-      <input type="text" name="captcha" required>
-      <input type="hidden" name="encryptedData" value="A5Y+7qKW4zxh+YRZtdjPe9NYk5Vgz5RKgZmjCMJ3utLduJnXYMU5KQ7DQxWBv+qaQUVaUmJOSi9nWjVUdU9PZEVSblBTQT09">
-      <input type="submit" value="Vérifier">
-    </form>
-  </body>
-  </html>
-  
+require_once 'Captcha.php';
+require_once 'Crypt/Encryption.php';
+
+// Get chiffrement key and hmac key from secrets.php
+require_once 'secrets.php';
+
+$captcha = new Captcha(width: 200, height: 50, numberOfCharacters: 5);
+
+// Créez une instance de Encryption
+$encryptionService = new Encryption($key, $hmacKey);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  $decryptedData = $encryptionService->decrypt($_POST['encryptedData']);
+  $decryptedData = str_replace(' ', '+', $decryptedData);
+
+  $isSubmetted = true;
+  var_dump($_POST['captcha']);
+  if (
+    $_POST['captcha'] === $decryptedData
+  ) {
+    echo "Captcha correct";
+  } else {
+    echo "Captcha incorrect";
+  }
+  die('stop');
+}
+
+try {
+
+  $encryptedData = null;
+  $encryptedData = isset($_GET['rnd']) ? $_GET['rnd'] : null;
+
+  if (null === $encryptedData) {
+    return;
+  }
+  //replace  espace by +
+  $encryptedData = str_replace(' ', '+', $encryptedData);
+
+  $captchaString = $encryptionService->decrypt($encryptedData);
+  $imageData = $captcha->generate($captchaString);
+} catch (Exception $e) {
+  echo "Une erreur s'est produite : " . $e->getMessage() . "\n";
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Captcha Test</title>
+</head>
+
+
+<body>
+  <form method="post">
+    <img src="data:image/png;base64,<?php echo isset($imageData) ? base64_encode($imageData) : ''; ?>" alt="CAPTCHA">
+    <br>
+    <input type="text" name="captcha" required>
+    <input type="hidden" name="encryptedData" value="<?php echo $encryptedData; ?>">
+    <input type="submit" value="Vérifier">
+  </form>
+</body>
+
+</html>

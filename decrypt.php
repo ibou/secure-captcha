@@ -27,12 +27,12 @@ try {
   $captchaString = $encryptionService->decrypt($encryptedData);
   $imageData = $captcha->generate($captchaString);
   // Définir l'en-tête Content-Type pour une image PNG
+  header("Content-Type: image/png");
+
+  // Envoyer l'image directement au navigateur
+  echo $imageData;
 
 } catch (Exception $e) {
   echo "Une erreur s'est produite : " . $e->getMessage() . "\n";
 }
 
-header("Content-Type: image/png");
-
-// Envoyer l'image directement au navigateur
-echo $imageData;
